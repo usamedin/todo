@@ -15,7 +15,7 @@ enum TodoStatus {
 }
 
 model ToDo {
-  id     Int        @id @default(autoincrement())
+  id     String     @id @default(cuid()) @map("uuid")
   value  String
   status TodoStatus
 }

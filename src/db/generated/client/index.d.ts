@@ -880,28 +880,18 @@ export namespace Prisma {
 
   export type AggregateToDo = {
     _count: ToDoCountAggregateOutputType | null
-    _avg: ToDoAvgAggregateOutputType | null
-    _sum: ToDoSumAggregateOutputType | null
     _min: ToDoMinAggregateOutputType | null
     _max: ToDoMaxAggregateOutputType | null
   }
 
-  export type ToDoAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type ToDoSumAggregateOutputType = {
-    id: number | null
-  }
-
   export type ToDoMinAggregateOutputType = {
-    id: number | null
+    id: string | null
     value: string | null
     status: $Enums.TodoStatus | null
   }
 
   export type ToDoMaxAggregateOutputType = {
-    id: number | null
+    id: string | null
     value: string | null
     status: $Enums.TodoStatus | null
   }
@@ -913,14 +903,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type ToDoAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type ToDoSumAggregateInputType = {
-    id?: true
-  }
 
   export type ToDoMinAggregateInputType = {
     id?: true
@@ -979,18 +961,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: ToDoAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ToDoSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: ToDoMinAggregateInputType
@@ -1021,19 +991,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ToDoCountAggregateInputType | true
-    _avg?: ToDoAvgAggregateInputType
-    _sum?: ToDoSumAggregateInputType
     _min?: ToDoMinAggregateInputType
     _max?: ToDoMaxAggregateInputType
   }
 
   export type ToDoGroupByOutputType = {
-    id: number
+    id: string
     value: string
     status: $Enums.TodoStatus
     _count: ToDoCountAggregateOutputType | null
-    _avg: ToDoAvgAggregateOutputType | null
-    _sum: ToDoSumAggregateOutputType | null
     _min: ToDoMinAggregateOutputType | null
     _max: ToDoMaxAggregateOutputType | null
   }
@@ -1069,7 +1035,7 @@ export namespace Prisma {
     name: "ToDo"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      id: string
       value: string
       status: $Enums.TodoStatus
     }, ExtArgs["result"]["toDo"]>
@@ -1466,7 +1432,7 @@ export namespace Prisma {
    * Fields of the ToDo model
    */ 
   interface ToDoFieldRefs {
-    readonly id: FieldRef<"ToDo", 'Int'>
+    readonly id: FieldRef<"ToDo", 'String'>
     readonly value: FieldRef<"ToDo", 'String'>
     readonly status: FieldRef<"ToDo", 'TodoStatus'>
   }
@@ -1801,20 +1767,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -1843,16 +1795,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Int'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'Float[]'
+   * Reference to a field of type 'Int[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
   /**
    * Deep Input Types
@@ -1863,7 +1815,7 @@ export namespace Prisma {
     AND?: ToDoWhereInput | ToDoWhereInput[]
     OR?: ToDoWhereInput[]
     NOT?: ToDoWhereInput | ToDoWhereInput[]
-    id?: IntFilter<"ToDo"> | number
+    id?: StringFilter<"ToDo"> | string
     value?: StringFilter<"ToDo"> | string
     status?: EnumTodoStatusFilter<"ToDo"> | $Enums.TodoStatus
   }
@@ -1875,7 +1827,7 @@ export namespace Prisma {
   }
 
   export type ToDoWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: ToDoWhereInput | ToDoWhereInput[]
     OR?: ToDoWhereInput[]
     NOT?: ToDoWhereInput | ToDoWhereInput[]
@@ -1888,69 +1840,59 @@ export namespace Prisma {
     value?: SortOrder
     status?: SortOrder
     _count?: ToDoCountOrderByAggregateInput
-    _avg?: ToDoAvgOrderByAggregateInput
     _max?: ToDoMaxOrderByAggregateInput
     _min?: ToDoMinOrderByAggregateInput
-    _sum?: ToDoSumOrderByAggregateInput
   }
 
   export type ToDoScalarWhereWithAggregatesInput = {
     AND?: ToDoScalarWhereWithAggregatesInput | ToDoScalarWhereWithAggregatesInput[]
     OR?: ToDoScalarWhereWithAggregatesInput[]
     NOT?: ToDoScalarWhereWithAggregatesInput | ToDoScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"ToDo"> | number
+    id?: StringWithAggregatesFilter<"ToDo"> | string
     value?: StringWithAggregatesFilter<"ToDo"> | string
     status?: EnumTodoStatusWithAggregatesFilter<"ToDo"> | $Enums.TodoStatus
   }
 
   export type ToDoCreateInput = {
+    id?: string
     value: string
     status: $Enums.TodoStatus
   }
 
   export type ToDoUncheckedCreateInput = {
-    id?: number
+    id?: string
     value: string
     status: $Enums.TodoStatus
   }
 
   export type ToDoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
   }
 
   export type ToDoUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
   }
 
   export type ToDoCreateManyInput = {
-    id?: number
+    id?: string
     value: string
     status: $Enums.TodoStatus
   }
 
   export type ToDoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
   }
 
   export type ToDoUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -1981,10 +1923,6 @@ export namespace Prisma {
     status?: SortOrder
   }
 
-  export type ToDoAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
   export type ToDoMaxOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
@@ -1995,26 +1933,6 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     status?: SortOrder
-  }
-
-  export type ToDoSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2053,25 +1971,6 @@ export namespace Prisma {
     set?: $Enums.TodoStatus
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2093,33 +1992,6 @@ export namespace Prisma {
     not?: NestedEnumTodoStatusFilter<$PrismaModel> | $Enums.TodoStatus
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2135,6 +2007,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedEnumTodoStatusWithAggregatesFilter<$PrismaModel = never> = {
