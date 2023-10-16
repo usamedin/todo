@@ -11,6 +11,7 @@ export async function handlerMiddleware(
   response: Response
 ) {
   try {
+    console.log('\nHandler Request:', request.path, request.body)
     let error: any
     let context: any = { prisma }
 
@@ -19,7 +20,7 @@ export async function handlerMiddleware(
       return
     }
     const result = await handler(stripRequest(request), context)
-
+    console.log('Handler Response:', result)
     response.send(result)
   } catch (error: any) {
     if (error.statusCode) {
