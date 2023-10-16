@@ -12,7 +12,6 @@ export async function handlerMiddleware(
 ) {
   try {
     let error: any
-    let event: any = {}
     let context: any = { prisma }
 
     if (error) {

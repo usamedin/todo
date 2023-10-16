@@ -7,4 +7,8 @@ export const ErrorResponse = {
     statusCode: 500,
     message: 'Internal server error',
   },
+  INVALID_INPUT_PARAMETERS: {
+    statusCode: 400,
+    message: 'Invalid input parameters',
+  },
 }
