@@ -1,24 +1,24 @@
 import Joi from 'joi';
-import { TodoStatus } from '../../db/generated/client'
 import { Context, HandlerEvent } from "../../types/Handler";
 import { ErrorResponse } from '../../utils/ResponseCodes';
 
-export async function createTodoHandler(event: HandlerEvent, context: Context) {
-  const { value: todo, error } = CreateTodoSchema.validate(event.body)
+export async function updateTodoHandler(event: HandlerEvent, context: Context) {
+  const id = event.params.id
+  const { value: todo, error } = UpdateTodoSchema.validate(event.body)
   if (error) {
     throw { ...ErrorResponse.INVALID_INPUT_PARAMETERS, message: error.details }
   }
 
-  const todoResponse = await context.prisma.toDo.create({
+  const todoResponse = await context.prisma.toDo.update({
+    where: { id },
     data: {
       value: todo.value,
-      status: TodoStatus.TODO,
     },
   })
 
   return todoResponse
 }
 
-export const CreateTodoSchema = Joi.object({
+export const UpdateTodoSchema = Joi.object({
   value: Joi.string().max(300).required(),
 }).unknown(true)

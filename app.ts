@@ -5,6 +5,8 @@ import { VERSION } from './src/utils/constants';
 import { createTodoHandler } from './src/handlers/todo/createTodo';
 import { handlerMiddleware } from './src/utils/RequestMiddleware';
 import { getTodosHandler } from './src/handlers/todo/getTodos';
+import { updateTodoHandler } from './src/handlers/todo/updateTodo';
+import { completeTodoHandler } from './src/handlers/todo/completeTodo';
 
 const app = express();
 app.use(express.json());
@@ -14,6 +16,8 @@ app.get('/about', (req, res) => {
 });
 
 app.post('/api/todo', (request: Request, response: Response) => handlerMiddleware(createTodoHandler, request, response))
+app.put('/api/todo/:id', (request: Request, response: Response) => handlerMiddleware(updateTodoHandler, request, response))
+app.put('/api/todo/complete/:id', (request: Request, response: Response) => handlerMiddleware(completeTodoHandler, request, response))
 app.get('/api/todos', (request: Request, response: Response) => handlerMiddleware(getTodosHandler, request, response))
 
 const port = 3000;
