@@ -888,18 +888,24 @@ export namespace Prisma {
     id: string | null
     value: string | null
     status: $Enums.TodoStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ToDoMaxAggregateOutputType = {
     id: string | null
     value: string | null
     status: $Enums.TodoStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ToDoCountAggregateOutputType = {
     id: number
     value: number
     status: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -908,18 +914,24 @@ export namespace Prisma {
     id?: true
     value?: true
     status?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ToDoMaxAggregateInputType = {
     id?: true
     value?: true
     status?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ToDoCountAggregateInputType = {
     id?: true
     value?: true
     status?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -999,6 +1011,8 @@ export namespace Prisma {
     id: string
     value: string
     status: $Enums.TodoStatus
+    createdAt: Date
+    updatedAt: Date
     _count: ToDoCountAggregateOutputType | null
     _min: ToDoMinAggregateOutputType | null
     _max: ToDoMaxAggregateOutputType | null
@@ -1022,12 +1036,16 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["toDo"]>
 
   export type ToDoSelectScalar = {
     id?: boolean
     value?: boolean
     status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
 
@@ -1038,6 +1056,8 @@ export namespace Prisma {
       id: string
       value: string
       status: $Enums.TodoStatus
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["toDo"]>
     composites: {}
   }
@@ -1435,6 +1455,8 @@ export namespace Prisma {
     readonly id: FieldRef<"ToDo", 'String'>
     readonly value: FieldRef<"ToDo", 'String'>
     readonly status: FieldRef<"ToDo", 'TodoStatus'>
+    readonly createdAt: FieldRef<"ToDo", 'DateTime'>
+    readonly updatedAt: FieldRef<"ToDo", 'DateTime'>
   }
     
 
@@ -1739,7 +1761,9 @@ export namespace Prisma {
   export const ToDoScalarFieldEnum: {
     id: 'id',
     value: 'value',
-    status: 'status'
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ToDoScalarFieldEnum = (typeof ToDoScalarFieldEnum)[keyof typeof ToDoScalarFieldEnum]
@@ -1795,6 +1819,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1818,12 +1856,16 @@ export namespace Prisma {
     id?: StringFilter<"ToDo"> | string
     value?: StringFilter<"ToDo"> | string
     status?: EnumTodoStatusFilter<"ToDo"> | $Enums.TodoStatus
+    createdAt?: DateTimeFilter<"ToDo"> | Date | string
+    updatedAt?: DateTimeFilter<"ToDo"> | Date | string
   }
 
   export type ToDoOrderByWithRelationInput = {
     id?: SortOrder
     value?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ToDoWhereUniqueInput = Prisma.AtLeast<{
@@ -1833,12 +1875,16 @@ export namespace Prisma {
     NOT?: ToDoWhereInput | ToDoWhereInput[]
     value?: StringFilter<"ToDo"> | string
     status?: EnumTodoStatusFilter<"ToDo"> | $Enums.TodoStatus
+    createdAt?: DateTimeFilter<"ToDo"> | Date | string
+    updatedAt?: DateTimeFilter<"ToDo"> | Date | string
   }, "id">
 
   export type ToDoOrderByWithAggregationInput = {
     id?: SortOrder
     value?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ToDoCountOrderByAggregateInput
     _max?: ToDoMaxOrderByAggregateInput
     _min?: ToDoMinOrderByAggregateInput
@@ -1851,48 +1897,64 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ToDo"> | string
     value?: StringWithAggregatesFilter<"ToDo"> | string
     status?: EnumTodoStatusWithAggregatesFilter<"ToDo"> | $Enums.TodoStatus
+    createdAt?: DateTimeWithAggregatesFilter<"ToDo"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ToDo"> | Date | string
   }
 
   export type ToDoCreateInput = {
     id?: string
     value: string
     status: $Enums.TodoStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ToDoUncheckedCreateInput = {
     id?: string
     value: string
     status: $Enums.TodoStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ToDoUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ToDoUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ToDoCreateManyInput = {
     id?: string
     value: string
     status: $Enums.TodoStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ToDoUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ToDoUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -1917,22 +1979,39 @@ export namespace Prisma {
     not?: NestedEnumTodoStatusFilter<$PrismaModel> | $Enums.TodoStatus
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type ToDoCountOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ToDoMaxOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ToDoMinOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -1963,12 +2042,30 @@ export namespace Prisma {
     _max?: NestedEnumTodoStatusFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type EnumTodoStatusFieldUpdateOperationsInput = {
     set?: $Enums.TodoStatus
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -1990,6 +2087,17 @@ export namespace Prisma {
     in?: $Enums.TodoStatus[] | ListEnumTodoStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.TodoStatus[] | ListEnumTodoStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumTodoStatusFilter<$PrismaModel> | $Enums.TodoStatus
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2028,6 +2136,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTodoStatusFilter<$PrismaModel>
     _max?: NestedEnumTodoStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 

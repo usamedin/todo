@@ -11,4 +11,8 @@ export const ErrorResponse = {
     statusCode: 400,
     message: 'Invalid input parameters',
   },
+  ITEM_NOT_FOUND: {
+    statusCode: 400,
+    message: 'Item not found',
+  },
 }

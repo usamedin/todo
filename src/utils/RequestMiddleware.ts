@@ -24,11 +24,11 @@ export async function handlerMiddleware(
     response.send(result)
   } catch (error: any) {
     if (error.statusCode) {
-      response.status(error.statusCode).send(error.message)
+      response.status(error.statusCode).send(error)
     } else {
       console.log('Error in HandlerMiddleware', error)
       const { statusCode, message } = ErrorResponse.INTERNAL_SERVER_ERROR
-      response.status(statusCode).send(message)
+      response.status(statusCode).send({ message, statusCode })
     }
   }
 }

@@ -9,14 +9,22 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
     throw { ...ErrorResponse.INVALID_INPUT_PARAMETERS, message: error.details }
   }
 
-  const todoResponse = await context.prisma.toDo.update({
-    where: { id },
-    data: {
-      value: todo.value,
-    },
-  })
+  try {
+    const todoResponse = await context.prisma.toDo.update({
+      where: { id },
+      data: {
+        value: todo.value,
+      },
+    })
+    return todoResponse
+  } catch (error: any) {
+    console.log('Error here ', error.code)
+    // Prisma Item Not found
+    if (error.code == 'P2025') {
+      throw ErrorResponse.ITEM_NOT_FOUND
+    }
+  }
 
-  return todoResponse
 }
 
 export const UpdateTodoSchema = Joi.object({

@@ -4,11 +4,17 @@ import { Context, HandlerEvent } from "../../types/Handler";
 import { ErrorResponse } from "../../utils/ResponseCodes";
 
 export async function getTodosHandler(event: HandlerEvent, context: Context) {
-  let { pageNumber, pageSize } = { pageNumber: '1', pageSize: '10', ...event.query }
+  let { pageNumber, pageSize, status } = {
+    pageNumber: '1',
+    pageSize: '10',
+    status: undefined,
+    ...event.query
+  }
 
   const { value: todo, error } = GetTodosSchema.validate({
     pageNumber,
-    pageSize
+    pageSize,
+    status
   })
   if (error) {
     throw { ...ErrorResponse.INVALID_INPUT_PARAMETERS, message: error.details }
@@ -20,7 +26,7 @@ export async function getTodosHandler(event: HandlerEvent, context: Context) {
 
   const todosResponse = await context.prisma.toDo.findMany({
     where: {
-      status: { not: TodoStatus.DONE }
+      status: status ? status : { not: TodoStatus.DONE }
     },
     skip,
     take: pageSizeInt,
@@ -36,4 +42,5 @@ export async function getTodosHandler(event: HandlerEvent, context: Context) {
 export const GetTodosSchema = Joi.object({
   pageNumber: Joi.number().min(1),
   pageSize: Joi.number().max(100),
+  status: Joi.string().valid('TODO', "IN_PROGRESS", 'DONE'),
 }).unknown(true)
