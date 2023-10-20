@@ -8,6 +8,7 @@ import { getTodosHandler } from './src/handlers/todo/getTodos';
 import { updateTodoHandler } from './src/handlers/todo/updateTodo';
 import { completeTodoHandler } from './src/handlers/todo/completeTodo';
 import { AuthMiddlewere } from './src/utils/AuthMiddleware';
+import MicrosoftTodo from './src/handlers/microsoft-todo'
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,9 @@ app.post('/api/todo', (request: Request, response: Response) => handlerMiddlewar
 app.put('/api/todo/:id', (request: Request, response: Response) => handlerMiddleware(updateTodoHandler, request, response))
 app.put('/api/todo/complete/:id', (request: Request, response: Response) => handlerMiddleware(completeTodoHandler, request, response))
 app.get('/api/todos', (request: Request, response: Response) => handlerMiddleware(getTodosHandler, request, response))
+
+// Integrations
+MicrosoftTodo(app)
 
 const port = 3000;
 app.listen(port, () => {
