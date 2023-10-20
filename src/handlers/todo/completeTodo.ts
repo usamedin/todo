@@ -7,7 +7,10 @@ export async function completeTodoHandler(event: HandlerEvent, context: Context)
 
   try {
     const todoResponse = await context.prisma.toDo.update({
-      where: { id },
+      where: {
+        id,
+        userId: event.userId
+      },
       data: {
         status: TodoStatus.DONE,
       },

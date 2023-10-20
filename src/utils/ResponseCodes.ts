@@ -15,4 +15,12 @@ export const ErrorResponse = {
     statusCode: 400,
     message: 'Item not found',
   },
+  INVALID_TOKEN:{
+    statusCode: 401,
+    message: 'Token is invalid',
+  },
+  USER_UNAUTHORIZED:{
+    statusCode: 401,
+    message: 'User is unauthorized',
+  }
 }

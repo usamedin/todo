@@ -11,7 +11,10 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
 
   try {
     const todoResponse = await context.prisma.toDo.update({
-      where: { id },
+      where: {
+        id,
+        userId: event.userId
+      },
       data: {
         value: todo.value,
       },
@@ -23,8 +26,8 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
     if (error.code == 'P2025') {
       throw ErrorResponse.ITEM_NOT_FOUND
     }
+    throw ErrorResponse.INTERNAL_SERVER_ERROR
   }
-
 }
 
 export const UpdateTodoSchema = Joi.object({

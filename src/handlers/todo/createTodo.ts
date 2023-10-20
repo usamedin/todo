@@ -13,6 +13,7 @@ export async function createTodoHandler(event: HandlerEvent, context: Context) {
     data: {
       value: todo.value,
       status: TodoStatus.TODO,
+      userId: event.userId
     },
   })
 

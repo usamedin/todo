@@ -890,6 +890,7 @@ export namespace Prisma {
     status: $Enums.TodoStatus | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type ToDoMaxAggregateOutputType = {
@@ -898,6 +899,7 @@ export namespace Prisma {
     status: $Enums.TodoStatus | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type ToDoCountAggregateOutputType = {
@@ -906,6 +908,7 @@ export namespace Prisma {
     status: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -916,6 +919,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type ToDoMaxAggregateInputType = {
@@ -924,6 +928,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type ToDoCountAggregateInputType = {
@@ -932,6 +937,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -1013,6 +1019,7 @@ export namespace Prisma {
     status: $Enums.TodoStatus
     createdAt: Date
     updatedAt: Date
+    userId: string
     _count: ToDoCountAggregateOutputType | null
     _min: ToDoMinAggregateOutputType | null
     _max: ToDoMaxAggregateOutputType | null
@@ -1038,6 +1045,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }, ExtArgs["result"]["toDo"]>
 
   export type ToDoSelectScalar = {
@@ -1046,6 +1054,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
 
@@ -1058,6 +1067,7 @@ export namespace Prisma {
       status: $Enums.TodoStatus
       createdAt: Date
       updatedAt: Date
+      userId: string
     }, ExtArgs["result"]["toDo"]>
     composites: {}
   }
@@ -1457,6 +1467,7 @@ export namespace Prisma {
     readonly status: FieldRef<"ToDo", 'TodoStatus'>
     readonly createdAt: FieldRef<"ToDo", 'DateTime'>
     readonly updatedAt: FieldRef<"ToDo", 'DateTime'>
+    readonly userId: FieldRef<"ToDo", 'String'>
   }
     
 
@@ -1763,7 +1774,8 @@ export namespace Prisma {
     value: 'value',
     status: 'status',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type ToDoScalarFieldEnum = (typeof ToDoScalarFieldEnum)[keyof typeof ToDoScalarFieldEnum]
@@ -1858,6 +1870,7 @@ export namespace Prisma {
     status?: EnumTodoStatusFilter<"ToDo"> | $Enums.TodoStatus
     createdAt?: DateTimeFilter<"ToDo"> | Date | string
     updatedAt?: DateTimeFilter<"ToDo"> | Date | string
+    userId?: StringFilter<"ToDo"> | string
   }
 
   export type ToDoOrderByWithRelationInput = {
@@ -1866,6 +1879,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type ToDoWhereUniqueInput = Prisma.AtLeast<{
@@ -1877,6 +1891,7 @@ export namespace Prisma {
     status?: EnumTodoStatusFilter<"ToDo"> | $Enums.TodoStatus
     createdAt?: DateTimeFilter<"ToDo"> | Date | string
     updatedAt?: DateTimeFilter<"ToDo"> | Date | string
+    userId?: StringFilter<"ToDo"> | string
   }, "id">
 
   export type ToDoOrderByWithAggregationInput = {
@@ -1885,6 +1900,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     _count?: ToDoCountOrderByAggregateInput
     _max?: ToDoMaxOrderByAggregateInput
     _min?: ToDoMinOrderByAggregateInput
@@ -1899,6 +1915,7 @@ export namespace Prisma {
     status?: EnumTodoStatusWithAggregatesFilter<"ToDo"> | $Enums.TodoStatus
     createdAt?: DateTimeWithAggregatesFilter<"ToDo"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ToDo"> | Date | string
+    userId?: StringWithAggregatesFilter<"ToDo"> | string
   }
 
   export type ToDoCreateInput = {
@@ -1907,6 +1924,7 @@ export namespace Prisma {
     status: $Enums.TodoStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type ToDoUncheckedCreateInput = {
@@ -1915,6 +1933,7 @@ export namespace Prisma {
     status: $Enums.TodoStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type ToDoUpdateInput = {
@@ -1923,6 +1942,7 @@ export namespace Prisma {
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ToDoUncheckedUpdateInput = {
@@ -1931,6 +1951,7 @@ export namespace Prisma {
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ToDoCreateManyInput = {
@@ -1939,6 +1960,7 @@ export namespace Prisma {
     status: $Enums.TodoStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type ToDoUpdateManyMutationInput = {
@@ -1947,6 +1969,7 @@ export namespace Prisma {
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ToDoUncheckedUpdateManyInput = {
@@ -1955,6 +1978,7 @@ export namespace Prisma {
     status?: EnumTodoStatusFieldUpdateOperationsInput | $Enums.TodoStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -1996,6 +2020,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type ToDoMaxOrderByAggregateInput = {
@@ -2004,6 +2029,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type ToDoMinOrderByAggregateInput = {
@@ -2012,6 +2038,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {

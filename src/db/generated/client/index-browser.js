@@ -112,7 +112,8 @@ exports.Prisma.ToDoScalarFieldEnum = {
   value: 'value',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {

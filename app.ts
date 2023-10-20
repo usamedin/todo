@@ -7,9 +7,11 @@ import { handlerMiddleware } from './src/utils/RequestMiddleware';
 import { getTodosHandler } from './src/handlers/todo/getTodos';
 import { updateTodoHandler } from './src/handlers/todo/updateTodo';
 import { completeTodoHandler } from './src/handlers/todo/completeTodo';
+import { AuthMiddlewere } from './src/utils/AuthMiddleware';
 
 const app = express();
 app.use(express.json());
+app.use(AuthMiddlewere);
 
 app.get('/about', (req, res) => {
   res.send({ serviceName: 'Todo service', version: VERSION });

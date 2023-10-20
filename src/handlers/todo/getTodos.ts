@@ -26,7 +26,8 @@ export async function getTodosHandler(event: HandlerEvent, context: Context) {
 
   const todosResponse = await context.prisma.toDo.findMany({
     where: {
-      status: status ? status : { not: TodoStatus.DONE }
+      status: (status ? status : { not: TodoStatus.DONE }),
+      userId: event.userId
     },
     skip,
     take: pageSizeInt,
