@@ -116,6 +116,32 @@ exports.Prisma.ToDoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.ExternalTodoIntegrationScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId'
+};
+
+exports.Prisma.ExternalTodoMappingScalarFieldEnum = {
+  id: 'id',
+  externalId: 'externalId'
+};
+
+exports.Prisma.ExternalTodoMockScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.ExternalIntegrationMockScalarFieldEnum = {
+  userId: 'userId',
+  webhookUrl: 'webhookUrl',
+  token: 'token'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -132,7 +158,11 @@ exports.TodoStatus = exports.$Enums.TodoStatus = {
 };
 
 exports.Prisma.ModelName = {
-  ToDo: 'ToDo'
+  ToDo: 'ToDo',
+  ExternalTodoIntegration: 'ExternalTodoIntegration',
+  ExternalTodoMapping: 'ExternalTodoMapping',
+  ExternalTodoMock: 'ExternalTodoMock',
+  ExternalIntegrationMock: 'ExternalIntegrationMock'
 };
 
 /**

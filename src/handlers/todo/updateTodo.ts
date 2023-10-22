@@ -8,7 +8,7 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
   if (error) {
     throw { ...ErrorResponse.INVALID_INPUT_PARAMETERS, message: error.details }
   }
-
+  console.log(id, todo)
   try {
     const todoResponse = await context.prisma.toDo.update({
       where: {
@@ -21,7 +21,7 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
     })
     return todoResponse
   } catch (error: any) {
-    console.log('Error here ', error.code)
+    console.error('Error here ', error)
     // Prisma Item Not found
     if (error.code == 'P2025') {
       throw ErrorResponse.ITEM_NOT_FOUND

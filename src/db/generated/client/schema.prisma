@@ -22,3 +22,29 @@ model ToDo {
   updatedAt DateTime   @updatedAt
   userId    String
 }
+
+model ExternalTodoIntegration {
+  id     String @id @default(cuid()) @map("uuid")
+  token  String
+  userId String
+}
+
+model ExternalTodoMapping {
+  id         String @id @default(cuid()) @map("uuid")
+  externalId String
+}
+
+model ExternalTodoMock {
+  id        String     @id @default(cuid()) @map("uuid")
+  value     String
+  status    TodoStatus
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userId    String
+}
+
+model ExternalIntegrationMock {
+  userId     String @id
+  webhookUrl String
+  token      String
+}

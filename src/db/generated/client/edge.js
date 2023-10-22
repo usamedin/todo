@@ -95,6 +95,32 @@ exports.Prisma.ToDoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.ExternalTodoIntegrationScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId'
+};
+
+exports.Prisma.ExternalTodoMappingScalarFieldEnum = {
+  id: 'id',
+  externalId: 'externalId'
+};
+
+exports.Prisma.ExternalTodoMockScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.ExternalIntegrationMockScalarFieldEnum = {
+  userId: 'userId',
+  webhookUrl: 'webhookUrl',
+  token: 'token'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -111,7 +137,11 @@ exports.TodoStatus = exports.$Enums.TodoStatus = {
 };
 
 exports.Prisma.ModelName = {
-  ToDo: 'ToDo'
+  ToDo: 'ToDo',
+  ExternalTodoIntegration: 'ExternalTodoIntegration',
+  ExternalTodoMapping: 'ExternalTodoMapping',
+  ExternalTodoMock: 'ExternalTodoMock',
+  ExternalIntegrationMock: 'ExternalIntegrationMock'
 };
 /**
  * Create the Client
@@ -159,12 +189,12 @@ const config = {
       }
     }
   },
-  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgPSAicHJpc21hLWNsaWVudC1qcyIKICBvdXRwdXQgICA9ICIuLi9zcmMvZGIvZ2VuZXJhdGVkL2NsaWVudCIKfQoKZGF0YXNvdXJjZSB0b2RvIHsKICBwcm92aWRlciA9ICJwb3N0Z3Jlc3FsIgogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQp9CgplbnVtIFRvZG9TdGF0dXMgewogIFRPRE8KICBJTl9QUk9HUkVTUwogIERPTkUKfQoKbW9kZWwgVG9EbyB7CiAgaWQgICAgICAgIFN0cmluZyAgICAgQGlkIEBkZWZhdWx0KGN1aWQoKSkgQG1hcCgidXVpZCIpCiAgdmFsdWUgICAgIFN0cmluZwogIHN0YXR1cyAgICBUb2RvU3RhdHVzCiAgY3JlYXRlZEF0IERhdGVUaW1lICAgQGRlZmF1bHQobm93KCkpCiAgdXBkYXRlZEF0IERhdGVUaW1lICAgQHVwZGF0ZWRBdAogIHVzZXJJZCAgICBTdHJpbmcKfQo=",
-  "inlineSchemaHash": "cddcd59633008cfbb066d997c0709740c89dcae90a8ad23c414cc661cbed34ac"
+  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgPSAicHJpc21hLWNsaWVudC1qcyIKICBvdXRwdXQgICA9ICIuLi9zcmMvZGIvZ2VuZXJhdGVkL2NsaWVudCIKfQoKZGF0YXNvdXJjZSB0b2RvIHsKICBwcm92aWRlciA9ICJwb3N0Z3Jlc3FsIgogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQp9CgplbnVtIFRvZG9TdGF0dXMgewogIFRPRE8KICBJTl9QUk9HUkVTUwogIERPTkUKfQoKbW9kZWwgVG9EbyB7CiAgaWQgICAgICAgIFN0cmluZyAgICAgQGlkIEBkZWZhdWx0KGN1aWQoKSkgQG1hcCgidXVpZCIpCiAgdmFsdWUgICAgIFN0cmluZwogIHN0YXR1cyAgICBUb2RvU3RhdHVzCiAgY3JlYXRlZEF0IERhdGVUaW1lICAgQGRlZmF1bHQobm93KCkpCiAgdXBkYXRlZEF0IERhdGVUaW1lICAgQHVwZGF0ZWRBdAogIHVzZXJJZCAgICBTdHJpbmcKfQoKbW9kZWwgRXh0ZXJuYWxUb2RvSW50ZWdyYXRpb24gewogIGlkICAgICBTdHJpbmcgQGlkIEBkZWZhdWx0KGN1aWQoKSkgQG1hcCgidXVpZCIpCiAgdG9rZW4gIFN0cmluZwogIHVzZXJJZCBTdHJpbmcKfQoKbW9kZWwgRXh0ZXJuYWxUb2RvTWFwcGluZyB7CiAgaWQgICAgICAgICBTdHJpbmcgQGlkIEBkZWZhdWx0KGN1aWQoKSkgQG1hcCgidXVpZCIpCiAgZXh0ZXJuYWxJZCBTdHJpbmcKfQoKbW9kZWwgRXh0ZXJuYWxUb2RvTW9jayB7CiAgaWQgICAgICAgIFN0cmluZyAgICAgQGlkIEBkZWZhdWx0KGN1aWQoKSkgQG1hcCgidXVpZCIpCiAgdmFsdWUgICAgIFN0cmluZwogIHN0YXR1cyAgICBUb2RvU3RhdHVzCiAgY3JlYXRlZEF0IERhdGVUaW1lICAgQGRlZmF1bHQobm93KCkpCiAgdXBkYXRlZEF0IERhdGVUaW1lICAgQHVwZGF0ZWRBdAogIHVzZXJJZCAgICBTdHJpbmcKfQoKbW9kZWwgRXh0ZXJuYWxJbnRlZ3JhdGlvbk1vY2sgewogIHVzZXJJZCAgICAgU3RyaW5nIEBpZAogIHdlYmhvb2tVcmwgU3RyaW5nCiAgdG9rZW4gICAgICBTdHJpbmcKfQo=",
+  "inlineSchemaHash": "0abc44bf288e404eaa0e799c8a2b81ac6eaec21bc45b96df7345f10d50cee33b"
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"ToDo\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"dbName\":\"uuid\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"cuid\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"value\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"status\",\"kind\":\"enum\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"TodoStatus\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"isGenerated\":false,\"isUpdatedAt\":true},{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{\"TodoStatus\":{\"values\":[{\"name\":\"TODO\",\"dbName\":null},{\"name\":\"IN_PROGRESS\",\"dbName\":null},{\"name\":\"DONE\",\"dbName\":null}],\"dbName\":null}},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"ToDo\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"dbName\":\"uuid\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"cuid\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"value\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"status\",\"kind\":\"enum\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"TodoStatus\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"isGenerated\":false,\"isUpdatedAt\":true},{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"ExternalTodoIntegration\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"dbName\":\"uuid\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"cuid\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"token\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"ExternalTodoMapping\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"dbName\":\"uuid\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"cuid\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"externalId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"ExternalTodoMock\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"dbName\":\"uuid\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"cuid\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"value\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"status\",\"kind\":\"enum\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"TodoStatus\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"isGenerated\":false,\"isUpdatedAt\":true},{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"ExternalIntegrationMock\":{\"dbName\":null,\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"webhookUrl\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"token\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{\"TodoStatus\":{\"values\":[{\"name\":\"TODO\",\"dbName\":null},{\"name\":\"IN_PROGRESS\",\"dbName\":null},{\"name\":\"DONE\",\"dbName\":null}],\"dbName\":null}},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 
 
