@@ -35,5 +35,6 @@ export async function updateMockTodoHandler(event: HandlerEvent, context: Contex
 }
 
 export const UpdateTodoSchema = Joi.object({
-  value: Joi.string().max(300).required(),
+  value: Joi.string().max(300),
+  status: Joi.string().max(300),
 }).unknown(true)

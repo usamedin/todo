@@ -12,21 +12,17 @@ export async function handlerMiddleware(
 ) {
   try {
     console.log('\nHandler Request:', request.path, request.body)
-    let error: any
     let context: any = { prisma }
-
-    if (error) {
-      response.status(ErrorResponse.BAD_REQUEST.statusCode).send({ messages: [error.message || ErrorResponse.BAD_REQUEST.message] })
-      return
-    }
     const result = await handler(stripRequest(request), context)
     console.log('Handler Response:', result)
+
     response.send(result)
   } catch (error: any) {
+    console.log('Error in HandlerMiddleware', error)
+
     if (error.statusCode) {
       response.status(error.statusCode).send(error)
     } else {
-      console.log('Error in HandlerMiddleware', error)
       const { statusCode, message } = ErrorResponse.INTERNAL_SERVER_ERROR
       response.status(statusCode).send({ message, statusCode })
     }

@@ -32,5 +32,6 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
 }
 
 export const UpdateTodoSchema = Joi.object({
-  value: Joi.string().max(300).required(),
+  value: Joi.string().max(300),
+  status: Joi.string().max(300),
 }).unknown(true)
