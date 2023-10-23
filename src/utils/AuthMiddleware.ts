@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { JWT_SIGNING_KEY } from './constants'
 import { ErrorResponse } from './ResponseCodes'
+import { Request, Response } from 'express';
 
-export async function AuthMiddlewere(req: any, res: any, next: any) {
+export async function AuthMiddlewere(req: Request & { decodedToken: any }, res: Response, next: any) {
   const unguardedRoutes = ['', '/']
 
   if (unguardedRoutes.indexOf(req.path) > -1 || req.path.indexOf('robots') > -1) {
@@ -14,6 +15,10 @@ export async function AuthMiddlewere(req: any, res: any, next: any) {
 
   try {
     authorization = stripBearerFromAuthHeader(authorization)
+    if (!authorization) {
+      throw ErrorResponse.USER_UNAUTHORIZED
+    }
+
     await verifyToken(authorization)
     req.decodedToken = jwt.decode(authorization) as jwt.JwtPayload
     next()

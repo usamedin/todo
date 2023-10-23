@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ExternalTodoIntegration } from "../../db/generated/client";
 import { Context, HandlerEvent } from "../../types/Handler";
 import { SERVICE_DOMAIN } from "../../utils/constants";
