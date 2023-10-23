@@ -39,6 +39,6 @@ function stripRequest(request: Request) {
     query: request.query,
     headers: request.headers,
     params: request.params,
-    userId: (request as any).decodedToken.userId,
+    userId: (request as any).decodedToken?.userId,
   }
 }

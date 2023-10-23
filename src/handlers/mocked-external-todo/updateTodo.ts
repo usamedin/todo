@@ -1,8 +1,9 @@
-import Joi from 'joi';
+import Joi from "joi";
 import { Context, HandlerEvent } from "../../types/Handler";
-import { ErrorResponse } from '../../utils/ResponseCodes';
+import { ErrorResponse } from "../../utils/ResponseCodes";
+import { sendWebhook } from "./sendWebhook";
 
-export async function updateTodoHandler(event: HandlerEvent, context: Context) {
+export async function updateTodo(event: HandlerEvent, context: Context) {
   const id = event.params.id
   const { value: todo, error } = UpdateTodoSchema.validate(event.body)
   if (error) {
@@ -10,7 +11,7 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
   }
 
   try {
-    const todoResponse = await context.prisma.toDo.update({
+    const todoResponse = await context.prisma.externalTodoMock.update({
       where: {
         id,
         userId: event.userId
@@ -20,6 +21,8 @@ export async function updateTodoHandler(event: HandlerEvent, context: Context) {
         ...(todo.status ? { status: todo.status } : {})
       },
     })
+    await sendWebhook(todoResponse, event.headers, context)
+
     return todoResponse
   } catch (error: any) {
     console.error('Error here ', error)

@@ -2,18 +2,18 @@ import axios from "axios";
 import { ExternalTodoIntegration } from "../../db/generated/client";
 import { Context, HandlerEvent } from "../../types/Handler";
 import { SERVICE_DOMAIN } from "../../utils/constants";
+import { getHeadersJSONType } from "../../utils/RequestUtil";
 
 export async function connect(event: HandlerEvent, context: Context) {
   try {
-    const body = JSON.stringify({
-      webhookUrl: "http://localhost:3000/api/external-todo/webhook",
+    const body = {
+      webhookUrl: `${SERVICE_DOMAIN}/api/external-todo/webhook`,
       token: "1234"
-    })
+    }
     console.log('body', body)
     const response = await axios.post(`${SERVICE_DOMAIN}/mock/external-todo/connect`,
-      body, { headers: event.headers })
-
-    console.log('response', response)
+      body,
+      { headers: getHeadersJSONType(event.headers) })
 
     const integration = await context.prisma.externalTodoIntegration.create({
       data: {
@@ -29,7 +29,7 @@ export async function connect(event: HandlerEvent, context: Context) {
       success: true
     }
   } catch (err: any) {
-    console.error('Error in connect', err.response.statusCode)
+    console.error('Error in connect', err.response)
   }
 
   return {
@@ -38,4 +38,5 @@ export async function connect(event: HandlerEvent, context: Context) {
 }
 
 async function initialSync(integration: ExternalTodoIntegration) {
+  // TODO: Initial sync, get all todos from external API and save
 }
