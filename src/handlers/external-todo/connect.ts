@@ -1,10 +1,10 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { ExternalTodoIntegration } from "../../db/generated/client";
 import { Context, HandlerEvent } from "../../types/Handler";
 import { SERVICE_DOMAIN } from "../../utils/constants";
 import { getHeadersJSONType } from "../../utils/RequestUtil";
 
-export async function connect(event: HandlerEvent, context: Context) {
+export async function connectHandler(event: HandlerEvent, context: Context) {
   try {
     const body = {
       webhookUrl: `${SERVICE_DOMAIN}/api/external-todo/webhook`,

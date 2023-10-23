@@ -1,11 +1,11 @@
 import { Request, Response, Express } from 'express';
 import { handlerMiddleware } from "../../utils/RequestMiddleware";
-import { connect } from "./connect";
-import { createTodo } from './createTodo';
-import { updateTodo } from './updateTodo';
+import { connectMockHandler } from "./connectMock";
+import { createMockTodohandler } from './createTodoMock';
+import { updateMockTodoHandler } from './updateTodoMock';
 
 export default function addEndpoints(app: Express) {
-  app.post('/mock/external-todo/connect', (request: Request, response: Response) => handlerMiddleware(connect, request, response))
-  app.post('/mock/external-todo/todo', (request: Request, response: Response) => handlerMiddleware(createTodo, request, response))
-  app.put('/mock/external-todo/todo/:id', (request: Request, response: Response) => handlerMiddleware(updateTodo, request, response))
+  app.post('/mock/external-todo/connect', (request: Request, response: Response) => handlerMiddleware(connectMockHandler, request, response))
+  app.post('/mock/external-todo/todo', (request: Request, response: Response) => handlerMiddleware(createMockTodohandler, request, response))
+  app.put('/mock/external-todo/todo/:id', (request: Request, response: Response) => handlerMiddleware(updateMockTodoHandler, request, response))
 }

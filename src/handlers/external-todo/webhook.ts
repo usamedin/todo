@@ -3,12 +3,14 @@ import { Context, HandlerEvent } from "../../types/Handler";
 import { SERVICE_DOMAIN } from "../../utils/constants";
 import { getHeadersJSONType } from "../../utils/RequestUtil";
 import NodeCache from "node-cache";
-const cacheLock = new NodeCache();
+import { getLockKey } from "../../utils/util";
 
-export async function webhook(event: HandlerEvent, context: Context) {
+const cacheLock = new NodeCache({ stdTTL: 100, checkperiod: 60 });
+
+export async function webhookHandler(event: HandlerEvent, context: Context) {
   const { todoItem } = event.body
 
-  const lockKey = todoItem.id
+  const lockKey = getLockKey(todoItem)
   const lock = cacheLock.get(lockKey)
 
   if (lock) {
@@ -16,7 +18,7 @@ export async function webhook(event: HandlerEvent, context: Context) {
     return
   }
 
-  cacheLock.set(lockKey, true, 500)
+  cacheLock.set(lockKey, true, 60)
 
   const todoMapping = await context.prisma.externalTodoMapping.findFirst({
     where: { externalId: todoItem.id }

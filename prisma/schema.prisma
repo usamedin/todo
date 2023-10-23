@@ -15,7 +15,7 @@ enum TodoStatus {
 }
 
 model ToDo {
-  id        String     @id @default(cuid()) @map("uuid")
+  id        String     @id @default(cuid())
   value     String
   status    TodoStatus
   createdAt DateTime   @default(now())
@@ -24,18 +24,18 @@ model ToDo {
 }
 
 model ExternalTodoIntegration {
-  id     String @id @default(cuid()) @map("uuid")
+  id     String @id @default(cuid())
   token  String
   userId String
 }
 
 model ExternalTodoMapping {
-  id         String @id @default(cuid()) @map("uuid")
+  id         String @id @default(cuid())
   externalId String
 }
 
 model ExternalTodoMock {
-  id        String     @id @default(cuid()) @map("uuid")
+  id        String     @id @default(cuid())
   value     String
   status    TodoStatus
   createdAt DateTime   @default(now())

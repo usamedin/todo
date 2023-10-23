@@ -1,7 +1,6 @@
 import { Context, HandlerEvent } from "../../types/Handler";
 
-export async function connect(event: HandlerEvent, context: Context) {
-  console.log('event.body connect', event)
+export async function connectMockHandler(event: HandlerEvent, context: Context) {
   const token = 'QAr8Q~QPxZTJUhIJiUzhddHhJ_zh3CIrPfKYXbyK' // mocked/hardcoded token
   const data = {
     userId: event.userId,

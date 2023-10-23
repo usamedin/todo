@@ -4,7 +4,7 @@ import { TodoStatus } from "../../db/generated/client";
 import { ErrorResponse } from "../../utils/ResponseCodes";
 import { sendWebhook } from "./sendWebhook";
 
-export async function createTodo(event: HandlerEvent, context: Context) {
+export async function createMockTodohandler(event: HandlerEvent, context: Context) {
   const { value: todo, error } = CreateTodoSchema.validate(event.body)
   if (error) {
     throw { ...ErrorResponse.INVALID_INPUT_PARAMETERS, message: error.details }

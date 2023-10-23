@@ -3,7 +3,7 @@ import { Context, HandlerEvent } from "../../types/Handler";
 import { ErrorResponse } from "../../utils/ResponseCodes";
 import { sendWebhook } from "./sendWebhook";
 
-export async function updateTodo(event: HandlerEvent, context: Context) {
+export async function updateMockTodoHandler(event: HandlerEvent, context: Context) {
   const id = event.params.id
   const { value: todo, error } = UpdateTodoSchema.validate(event.body)
   if (error) {

@@ -3,7 +3,7 @@ import { JWT_SIGNING_KEY } from './constants'
 import { ErrorResponse } from './ResponseCodes'
 import { Request, Response } from 'express';
 
-export async function AuthMiddlewere(req: Request & { decodedToken: any }, res: Response, next: any) {
+export async function AuthMiddlewere(req: any, res: Response, next: any) {
   const unguardedRoutes = ['', '/']
 
   if (unguardedRoutes.indexOf(req.path) > -1 || req.path.indexOf('robots') > -1) {
