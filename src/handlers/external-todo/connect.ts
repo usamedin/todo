@@ -23,7 +23,7 @@ export async function connectHandler(event: HandlerEvent, context: Context) {
     })
 
     // Initial sync, load all todos from 3rd party service
-    await initialSync(integration)
+    await initialSync(integration, event.headers)
 
     return {
       success: true
@@ -37,6 +37,14 @@ export async function connectHandler(event: HandlerEvent, context: Context) {
   }
 }
 
-async function initialSync(integration: ExternalTodoIntegration) {
-  // TODO: Initial sync, get all todos from external API and save
+async function initialSync(integration: ExternalTodoIntegration, headers: any) {
+  const { data: todos } = await axios.get(`${SERVICE_DOMAIN}/mock/external-todo/todos`, {
+    headers: getHeadersJSONType(headers)
+  })
+
+  for (const todo of todos) {
+    await axios.post(`${SERVICE_DOMAIN}/api/external-todo/webhook`, { todoItem: todo }, {
+      headers: getHeadersJSONType(headers)
+    })
+  }
 }
