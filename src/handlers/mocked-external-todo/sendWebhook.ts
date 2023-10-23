@@ -12,10 +12,8 @@ export async function sendWebhook(todo: ExternalTodoMock, headers: any, context:
 
   if (integration?.webhookUrl) {
     try {
-      const body = JSON.stringify({ todoItem: todo })
-
       await axios.post(integration.webhookUrl,
-        body, { headers: getHeadersJSONType(headers) })
+        { todoItem: todo }, { headers: getHeadersJSONType(headers) })
 
     } catch (error: any) {
       console.error('Webhook error', error.response.status, error.response.statusText, error.response.data)

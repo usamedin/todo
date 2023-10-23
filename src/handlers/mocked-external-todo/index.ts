@@ -6,7 +6,6 @@ import { updateTodo } from './updateTodo';
 
 export default function addEndpoints(app: Express) {
   app.post('/mock/external-todo/connect', (request: Request, response: Response) => handlerMiddleware(connect, request, response))
-  app.post('/mock/external-todo/create', (request: Request, response: Response) => handlerMiddleware(createTodo, request, response))
-  app.put('/mock/external-todo/:id', (request: Request, response: Response) => handlerMiddleware(updateTodo, request, response))
-
+  app.post('/mock/external-todo/todo', (request: Request, response: Response) => handlerMiddleware(createTodo, request, response))
+  app.put('/mock/external-todo/todo/:id', (request: Request, response: Response) => handlerMiddleware(updateTodo, request, response))
 }

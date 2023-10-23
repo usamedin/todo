@@ -1,9 +1,22 @@
+import axios from "axios";
 import { Context, HandlerEvent } from "../../types/Handler";
-import { createTodoHandler } from "../todo/createTodo";
-import { updateTodoHandler } from "../todo/updateTodo";
+import { SERVICE_DOMAIN } from "../../utils/constants";
+import { getHeadersJSONType } from "../../utils/RequestUtil";
+import NodeCache from "node-cache";
+const cacheLock = new NodeCache();
 
 export async function webhook(event: HandlerEvent, context: Context) {
   const { todoItem } = event.body
+
+  const lockKey = todoItem.id
+  const lock = cacheLock.get(lockKey)
+
+  if (lock) {
+    console.log('Cache lock found, skipping update')
+    return
+  }
+
+  cacheLock.set(lockKey, true, 500)
 
   const todoMapping = await context.prisma.externalTodoMapping.findFirst({
     where: { externalId: todoItem.id }
@@ -15,16 +28,14 @@ export async function webhook(event: HandlerEvent, context: Context) {
     // Create
     console.debug('Creating item')
 
-    todo = await createTodoHandler({
-      body: {
-        value: todoItem.value,
-        status: todoItem.status
-      },
-      params: {},
-      query: {},
-      headers: event.headers,
-      userId: event.userId
-    }, context)
+    const response = await axios.post(`${SERVICE_DOMAIN}/api/todo`, {
+      value: todoItem.value,
+      status: todoItem.status
+    }, {
+      headers: getHeadersJSONType(event.headers),
+    })
+
+    todo = response.data
 
     await context.prisma.externalTodoMapping.create({
       data: {
@@ -36,16 +47,14 @@ export async function webhook(event: HandlerEvent, context: Context) {
     // Update
     console.debug('Updating item')
 
-    todo = await updateTodoHandler({
-      body: {
-        value: todoItem.value,
-        status: todoItem.status
-      },
-      params: { id: todoMapping.id },
-      query: {},
-      headers: event.headers,
-      userId: event.userId
-    }, context)
+    const response = await axios.put(`${SERVICE_DOMAIN}/api/todo/${todoMapping.id}`, {
+      value: todoItem.value,
+      status: todoItem.status
+    }, {
+      headers: getHeadersJSONType(event.headers),
+    })
+
+    todo = response.data
   }
 
   return {
